@@ -16,16 +16,17 @@ public class FollowMouse : MonoBehaviour {
         sr = GetComponent<SpriteRenderer>();
 
         Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Confined;
     }
 	
 	void Update () {
-        transform.position = Input.mousePosition;
+        //move cursor to mouse pos in game space
+        transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10f));
 
         ResetNearbyAudioSources();
         //RaycastToZ();
 	}
 
+    //could use something like this to try raycasting from the mouse 
     void RaycastToZ()
     {
         RaycastHit hit;
